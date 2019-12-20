@@ -95,6 +95,7 @@ describe('Given <Todos />', () => {
 
 		expect(getAddTodoInput()).toHaveValue(newTodo)
 
+		axios.mockClear()
 		axios.mockImplementation(
 			() =>
 				new Promise((resolve) =>
@@ -105,6 +106,10 @@ describe('Given <Todos />', () => {
 		)
 		userEvent.click(getAddTodoButton())
 
+		expect(axios).toHaveBeenCalledWith(`http:///localhost:7000/todos`, {
+			data: { text: newTodo },
+			method: 'POST',
+		})
 		expect(getAddTodoInput()).toHaveValue('')
 
 		const todos = await getAllTodos()
@@ -127,6 +132,7 @@ describe('Given <Todos />', () => {
 		const { findByText } = renderComponent()
 		const todo = await findByText(data[0].text)
 
+		axios.mockClear()
 		axios.mockImplementation(
 			() =>
 				new Promise((resolve) =>
@@ -136,6 +142,11 @@ describe('Given <Todos />', () => {
 				)
 		)
 		userEvent.click(todo)
+
+		expect(axios).toHaveBeenCalledWith(`http:///localhost:7000/todos/1`, {
+			data: { completed: true },
+			method: 'PUT',
+		})
 
 		const completedTodo = await findByText(data[0].text)
 

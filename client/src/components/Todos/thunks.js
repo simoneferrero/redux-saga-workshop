@@ -20,7 +20,7 @@ export const getTodos = () => async (dispatch) => {
 	}
 }
 
-export const addTodo = (text) => async (dispatch) => {
+export const addTodo = ({ text }) => async (dispatch) => {
 	try {
 		const { data } = await axios(`${API}todos`, {
 			data: { text },
@@ -33,7 +33,7 @@ export const addTodo = (text) => async (dispatch) => {
 	}
 }
 
-export const toggleTodo = (id, completed) => async (dispatch) => {
+export const toggleTodo = ({ id, completed }) => async (dispatch) => {
 	try {
 		const { data } = await axios(`${API}todos/${id}`, {
 			data: { completed },

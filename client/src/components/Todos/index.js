@@ -9,8 +9,9 @@ import { StyledLabel, StyledPaper, StyledWrapper } from './styled'
 const Todos = () => {
 	const [showCompleted, setShowCompleted] = useState(true)
 	const dispatch = useDispatch()
-	const handleSubmitTodo = (text) => dispatch(addTodo(text))
-	const handleToggleTodo = (id, text) => dispatch(toggleTodo(id, text))
+	const handleSubmitTodo = (text) => dispatch(addTodo({ text }))
+	const handleToggleTodo = (id, completed) =>
+		dispatch(toggleTodo({ id, completed }))
 
 	useEffect(() => {
 		dispatch(getTodos())
