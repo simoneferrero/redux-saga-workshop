@@ -7,6 +7,7 @@ const todosSlice = createSlice({
 		error: '',
 	},
 	reducers: {
+		addTodo: () => {},
 		addTodoError: (state, { payload: { error } }) => {
 			state.error = error
 		},
@@ -14,6 +15,7 @@ const todosSlice = createSlice({
 			state.items.push(payload)
 			state.error = ''
 		},
+		getTodos: () => {},
 		getTodosError: (state, { payload: { error } }) => {
 			state.error = error
 		},
@@ -21,6 +23,7 @@ const todosSlice = createSlice({
 			state.items = todos
 			state.error = ''
 		},
+		toggleTodo: () => {},
 		toggleTodoError: (state, { payload: { error } }) => {
 			state.error = error
 		},
@@ -33,10 +36,13 @@ const todosSlice = createSlice({
 })
 
 export const {
+	addTodo,
 	addTodoError,
 	addTodoSuccess,
+	getTodos,
 	getTodosError,
 	getTodosSuccess,
+	toggleTodo,
 	toggleTodoError,
 	toggleTodoSuccess,
 } = todosSlice.actions

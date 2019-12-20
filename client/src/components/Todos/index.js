@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import Todo from './Todo'
 import TodoForm from './TodoForm'
-import { addTodo, getTodos, toggleTodo } from './thunks'
+import { addTodo, getTodos, toggleTodo } from './todosSlice'
 import { StyledLabel, StyledPaper, StyledWrapper } from './styled'
 
 const Todos = () => {
