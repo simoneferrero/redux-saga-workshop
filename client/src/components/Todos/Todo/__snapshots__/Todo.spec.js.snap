@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Given <Todo /> should render correctly 1`] = `
+<button
+  class="Todo__StyledTodo-kdnq60-0 bLDqgx"
+  data-testid="todo-12345"
+>
+  Some Todo
+</button>
+`;

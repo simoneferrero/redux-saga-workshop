@@ -1,0 +1,32 @@
+version: '2'
+
+services:
+  redux-saga-workshop-client:
+    build: client
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./client:/app 
+
+  redux-saga-workshop-server:
+    build: server
+    ports:
+      - "7000:7000"
+    volumes:
+      - ./server:/app
+    links:
+      - redux-saga-workshop-db
+
+  redux-saga-workshop-db:
+    image: mongo
+    ports:
+      - "27017:27017"
+
+  redux-saga-workshop-swagger:
+    image: swaggerapi/swagger-ui
+    environment:
+      - SWAGGER_JSON=/swagger.yaml
+    volumes:
+      - ./swagger.yaml:/swagger.yaml
+    ports:
+      - "9001:8080"

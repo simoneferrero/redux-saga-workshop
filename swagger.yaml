@@ -1,0 +1,113 @@
+openapi: 3.0.0
+
+info:
+  title: Todo List
+  description: A glorified TODO list.
+
+servers:
+  - url: http://localhost:7000
+    description: Local development server
+
+components:
+  schemas:
+    todo:
+      type: object
+      properties:
+        id:
+          type: string
+        text:
+          type: string
+        completed:
+          type: boolean
+      example:
+        {id: '5de7a795e22b4801164afa51', text: 'First todo', completed: false}
+
+    error:
+      type: object
+      properties:
+        error:
+          type: string
+          example: Error message
+
+  requestBodies:
+    todos_post_body:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              text:
+                type: string
+          example:
+            {text: 'New todo'}
+
+    todos_put_body:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              completed:
+                type: boolean
+          example:
+            {completed: true}
+
+paths:
+  /api/todos:
+    get:
+      summary: Retrieves a list of all todos.
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/todo'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+
+    post:
+      summary: Adds a new todo.
+      requestBody:
+        $ref: '#/components/requestBodies/todos_post_body'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/todo'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+
+  /api/todos/{id}:
+    put:
+      summary: Modifies an existing todo.
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          example: '5de7a795e22b4801164afa51'
+      requestBody:
+        $ref: '#/components/requestBodies/todos_put_body'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/todo'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'

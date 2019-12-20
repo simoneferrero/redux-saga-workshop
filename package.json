@@ -1,0 +1,30 @@
+{
+	"name": "redux-saga-workshop",
+	"description": "A glorified TODO list",
+	"version": "0.1.0",
+	"author": {
+		"name": "Simone Ferrero"
+	},
+	"private": true,
+	"scripts": {
+		"format": "prettier --write",
+		"start": "docker-compose up --build --remove-orphans"
+	},
+	"devDependencies": {
+		"husky": "^3.1.0",
+		"lint-staged": "^9.5.0",
+		"prettier": "^1.19.1",
+		"supertest": "^4.0.2"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	},
+	"lint-staged": {
+		"*.js": [
+			"npm run format",
+			"git add"
+		]
+	}
+}
